@@ -12,3 +12,22 @@ function operate (firstNumber, secondNumber, operator) {
 } 
 
 console.log(operate(1, 6, add));
+
+const calculator = document.querySelector('#calculator');
+const display = document.querySelector('#display');
+
+let firstNum = [];
+
+calculator.addEventListener(('click'), (event) => {
+  const btn = event.target.closest('button');
+  let value = btn.id;
+  let position = firstNum;
+  
+  firstNum.push(Number(btn.id));
+  display.value = firstNum.join('');
+
+  console.table(firstNum);
+      
+
+  
+})
