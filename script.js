@@ -16,15 +16,21 @@ console.log(operate(1, 6, add));
 const calculator = document.querySelector('#calculator');
 const display = document.querySelector('#display');
 
-let firstNum = [];
+let firstNum = '';
 
 calculator.addEventListener(('click'), (event) => {
   const btn = event.target.closest('button');
   let value = btn.id;
   let position = firstNum;
+
+  if (value === 'clear'){
+    firstNum = ''
+    display.value = 0;
+  } else {
+    firstNum += value;
+    display.value = Number(firstNum);
+  }
   
-  firstNum.push(Number(btn.id));
-  display.value = firstNum.join('');
 
   console.table(firstNum);
       
