@@ -11,14 +11,14 @@ let num1 = 4, num2 = 10;
 function operate(num1, num2, operator){
   num1 = Number(num1);
   num2 = Number(num2);
-  return operator(num1, num2);
+  return operator(num1, num2).toString();
 }
 
 let word = 'times';
 
-let operator = operators[word];
+let symbol = operators[word];
 
-let result = operate(num1, num2, operator);
+let result = operate(num1, num2, symbol);
 
 console.log(result)
 
@@ -28,6 +28,8 @@ const calculator = document.querySelector('#calculator');
 const display = document.querySelector('#display');
 
 let firstNum = '', secondNum = '';
+let shiftToSecond = false;
+let currentOperator = '', nextOperator = '';
 
 calculator.addEventListener('click', event => {
   //if target is not a button, cancel
@@ -38,9 +40,27 @@ calculator.addEventListener('click', event => {
 
   if (isNumber(button)){
 
-    firstNum += getValue(button, firstNum);
-    display.value = firstNum;
+    if (!shiftToSecond){
+      firstNum += getValue(button, firstNum);
+      display.value = firstNum;
+    } else {
+      secondNum += getValue(button, secondNum);
+      display.value = secondNum;
+    }
+
+  } else if (isOperator(button)){
+    shiftToSecond = true;
+    if (!secondNum){
+      currentOperator = button;
+    } else if (button == 'equals') {
+      let operator = operators[currentOperator];
+      firstNum = operate(firstNum, secondNum, operator);
+      display.value = firstNum;
+      secondNum = '';
+      shiftToSecond = false;
+    }
   }
+
 });
 
 
@@ -66,5 +86,15 @@ const numbers = '1234567890.';
 let isNumber = button => {
   return numbers.includes(button);
 }
+const operations = ['plus', 'minus', 'times', 'divide', 'equals'];
+let isOperator = button => {
+  if (operations.includes(button)){
+    return true;
+  }
+}
+
+let a = 'plus';
+
+console.log(isOperator(a));
 
 
