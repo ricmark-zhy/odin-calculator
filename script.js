@@ -34,7 +34,7 @@ calculator.addEventListener('click', event => {
   if(!event.target.closest('button')){
     return;
   }
-  const button = event.target.textContent;
+  const button = event.target.id;
 
   if (isNumber(button)){
 
@@ -53,7 +53,9 @@ let getValue = (button, storage) => {
       return '0.'; //convert to this when decimal are entered first
     } else if (storage.includes('.')){
       return ''; //return nothing if decimal are already present.
-    }
+    } else {
+      return '.';
+    } 
   } else {
     return button;
   }
@@ -61,8 +63,8 @@ let getValue = (button, storage) => {
 }
 
 const numbers = '1234567890.';
-let isNumber = value => {
-  return numbers.includes(value);
+let isNumber = button => {
+  return numbers.includes(button);
 }
 
 
