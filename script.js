@@ -1,39 +1,23 @@
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+//create an object of operation functions 
+const operators = {
+  plus: (num1, num2) => num1 + num2,
+  minus: (num1, num2) => num1 - num2,
+  divide: (num1, num2) => num1 / num2,
+  times: (num1, num2) => num1 * num2,
+}
 
-console.log(add(1, 4));
+let num1 = 4, num2 = 10;
 
-let firstNumber, secondNumber, operator;
+function operate(num1, num2, operator){
+  return operator(num1, num2);
+}
 
-function operate (firstNumber, secondNumber, operator) {
-  return operator(firstNumber, secondNumber); 
-} 
+let word = 'times';
 
-console.log(operate(1, 6, add));
+let operator = operators[word];
 
-const calculator = document.querySelector('#calculator');
-const display = document.querySelector('#display');
+let result = operate(num1, num2, operator);
 
-let firstNum = '';
+console.log(result)
 
-calculator.addEventListener(('click'), (event) => {
-  const btn = event.target.closest('button');
-  let value = btn.id;
-  let position = firstNum;
-
-  if (value === 'clear'){
-    firstNum = ''
-    display.value = 0;
-  } else {
-    firstNum += value;
-    display.value = Number(firstNum);
-  }
-  
-
-  console.table(firstNum);
-      
-
-  
-})
+//create a function that update the display when number buttons are click
