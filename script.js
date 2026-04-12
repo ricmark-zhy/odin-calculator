@@ -41,23 +41,39 @@ calculator.addEventListener('click', event => {
   if (isNumber(button)){
 
     if (!shiftToSecond){
-      firstNum += getValue(button, firstNum);
+      if (display.value == '0'){
+        firstNum = getValue(button, firstNum);
+      } else {
+        firstNum += getValue(button, firstNum);
+      }
       display.value = firstNum;
     } else {
       secondNum += getValue(button, secondNum);
       display.value = secondNum;
     }
 
-  } else if (isOperator(button)){
+  }
+
+  if (isOperator(button)){
+
     shiftToSecond = true;
+
     if (!secondNum){
+      
       currentOperator = button;
-    } else if (button == 'equals') {
+
+    } else if (secondNum) { 
+
+      if (button == 'equals'){
+        shiftToSecond = false;
+      }
+
       let operator = operators[currentOperator];
       firstNum = operate(firstNum, secondNum, operator);
       display.value = firstNum;
       secondNum = '';
-      shiftToSecond = false;
+      currentOperator = button;
+
     }
   }
 
@@ -92,9 +108,5 @@ let isOperator = button => {
     return true;
   }
 }
-
-let a = 'plus';
-
-console.log(isOperator(a));
 
 
