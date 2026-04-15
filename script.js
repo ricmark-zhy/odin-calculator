@@ -25,7 +25,7 @@ const display = document.querySelector('#display');
 
 let firstNum = '', secondNum = '';
 let shiftToSecond = false;
-let currentOperator = '', nextOperator = '';
+let currentOperator = '';
 
 calculator.addEventListener('click', event => {
   //if target is not a button, cancel
@@ -51,9 +51,6 @@ calculator.addEventListener('click', event => {
   }
 
   if (isOperator(button)){
-    console.log('=========')
-    console.log(firstNum);
-    console.log(secondNum);
 
     if ((!firstNum || firstNum == '0') && button == 'minus'){
       firstNum = '-';
@@ -61,7 +58,7 @@ calculator.addEventListener('click', event => {
       return;
     }
     shiftToSecond = true;
-    
+
     if (!secondNum){
       
       currentOperator = button;
