@@ -6,20 +6,16 @@ const operators = {
   times: (num1, num2) => num1 * num2,
 }
 
-let num1 = 4, num2 = 10;
-
 function operate(num1, num2, operator){
   num1 = Number(num1);
   num2 = Number(num2);
   return operator(num1, num2).toString();
 }
 
+let num1 = 4, num2 = 10;
 let word = 'times';
-
 let symbol = operators[word];
-
 let result = operate(num1, num2, symbol);
-
 console.log(result)
 
 //create a function that update the display when number buttons are click
@@ -55,9 +51,17 @@ calculator.addEventListener('click', event => {
   }
 
   if (isOperator(button)){
+    console.log('=========')
+    console.log(firstNum);
+    console.log(secondNum);
 
+    if ((!firstNum || firstNum == '0') && button == 'minus'){
+      firstNum = '-';
+      display.value = firstNum;
+      return;
+    }
     shiftToSecond = true;
-
+    
     if (!secondNum){
       
       currentOperator = button;
@@ -70,7 +74,7 @@ calculator.addEventListener('click', event => {
 
       let operator = operators[currentOperator];
       firstNum = operate(firstNum, secondNum, operator);
-      display.value = firstNum;
+      display.value = Number(firstNum);
       secondNum = '';
       currentOperator = button;
 
