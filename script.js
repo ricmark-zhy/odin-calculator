@@ -34,6 +34,23 @@ calculator.addEventListener('click', event => {
   }
   const button = event.target.id;
 
+  if (button == 'clear'){
+    firstNum = '';
+    secondNum = '';
+    shiftToSecond = false;
+    display.value = '0';
+  }
+
+  if (button == 'delete'){
+    if (!shiftToSecond){
+      firstNum = firstNum.slice(0, -1);
+      display.value = firstNum;
+    } else {
+      secondNum = secondNum.slice(0, -1);
+      display.value = secondNum;
+    }
+  }
+
   if (isNumber(button)){
 
     if (!shiftToSecond){
@@ -44,7 +61,12 @@ calculator.addEventListener('click', event => {
       }
       display.value = firstNum;
     } else {
-      secondNum += getValue(button, secondNum);
+      if (secondNum == '0' && button == '0'){
+        secondNum = '0';
+      } else {
+        secondNum += getValue(button, secondNum);
+      }
+      
       display.value = secondNum;
     }
 
@@ -63,7 +85,7 @@ calculator.addEventListener('click', event => {
       
       currentOperator = button;
 
-    } else if (secondNum) { 
+    } else { 
 
       if (button == 'equals'){
         shiftToSecond = false;
@@ -109,5 +131,3 @@ let isOperator = button => {
     return true;
   }
 }
-
-
