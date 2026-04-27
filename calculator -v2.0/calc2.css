@@ -54,7 +54,7 @@ h1{
   font-size: 28px;
   font-weight: 600;
   border-radius: 24px;
-  box-shadow: 2px 4px rgb(36, 36, 36);
+  box-shadow: 2px 4px black;
   border: none;
   cursor: pointer;
   transform: translateY(-2px);
@@ -77,6 +77,13 @@ h1{
   width: 170px;
   font-size: 52px;
   font-weight: 300;
+  color: white;
+  box-shadow: 2px 4px rgb(182, 138, 6);
+  background-color: rgb(254, 191, 2);
+}
+
+#equals:active{
+  box-shadow: none;
 }
 
 #delete{
