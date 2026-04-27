@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odin Calculator</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="calc2.css">
 </head>
+
 <body>
-  
+
   <div class="calculator" id="calculator">
-    <form>
-      <div class="display-container">
-        <input type="text" id="display" value="0" readonly>
-      </div>
-      <div class="">
+    <div class="display">
+      <div class="previous-operand" id="previous_operand">349873847384730284787</div>
+      <div class="current-operand" id="current_operand">74087</div>
+    </div>
+    <div class="buttons">
+      <div class="button-container">
         <button type="reset" id="clear">AC</button>
         <button type="button" id="delete">C</button>
+        <button type="button" id="sign">+/−</button>
         <button type="button" class="operation" id="divide">÷</button>
       </div>
-      <div class="">
+      <div class="button-container">
         <button type="button" id="1">1</button>
         <button type="button" id="2">2</button>
         <button type="button" id="3">3</button>
         <button type="button" class="operation" id="times">×</button>
       </div>
-      <div class="">
+      <div class="button-container">
         <button type="button" id="4">4</button>
         <button type="button" id="5">5</button>
         <button type="button" id="6">6</button>
         <button type="button" class="operation" id="plus">+</button>
       </div>
-      <div class="">
+      <div class="button-container">
         <button type="button" id="7">7</button>
         <button type="button" id="8">8</button>
         <button type="button" id="9">9</button>
         <button type="button" class="operation" id="minus">−</button>
       </div>
-      <div class="">
+      <div class="button-container">
         <button type="button" id=".">.</button>
         <button type="button" id="0">0</button>
         <button type="button" class="operation" id="equals">=</button>
       </div>
-    </form>
+    </div>
   </div>
-  <a href="./calculator -v2.0/calc2.html">Calculator Version 2</a>
-  <script src="script.js"></script>
 </body>
+
 </html>
