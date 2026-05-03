@@ -40,7 +40,7 @@ function updateDisplay(){
     prev_operand.textContent = '';
     curr_operand.textContent = firstNum;
   } else {
-    prev_operand.textContent = firstNum + " " + currentOperator;
+    prev_operand.textContent = firstNum + "" + currentOperator;
     curr_operand.textContent = secondNum;
   }
 }
