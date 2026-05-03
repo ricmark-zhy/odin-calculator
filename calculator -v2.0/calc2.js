@@ -29,18 +29,10 @@ calculator.addEventListener('click', event => {
 });
 
 function handleNumber(button){
-
-  if (!shiftToSecond){
-    if (firstNum.includes('.') && button === '.'){
-      return;
-    }
-    firstNum += button;
-  } else {
-    if (secondNum.includes('.') && button === '.'){
-      return
-    }
-    secondNum += button;
-  }
+  let current = shiftToSecond ? secondNum : firstNum;
+  if (button === '.' && current.includes('.')) return;
+  current += button;
+  !shiftToSecond ? (firstNum = current) : (secondNum = current);
 }
 
 function updateDisplay(){
@@ -147,19 +139,12 @@ function clear(){
 }
 
 function changeSign(){
-  if (!shiftToSecond){
-    if (firstNum.includes('-')){
-      firstNum = firstNum.slice(1);
-    } else {
-      firstNum = '-' + firstNum;
-    }
-  } else {
-    if (secondNum.includes('-')){
-      secondNum = secondNum.slice(1);
-    } else {
-      secondNum = '-' + secondNum;
-    }
-  }
+  let current = shiftToSecond ? secondNum : firstNum;
+
+  current.includes('-') ? current = current.slice(1) : current = '-' + current;
+
+  !shiftToSecond ? (firstNum = current) : (secondNum = current);
+  
 }
 
 let operators = '÷×+−';
