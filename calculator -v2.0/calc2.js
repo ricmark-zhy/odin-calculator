@@ -62,7 +62,6 @@ let isZeroDivision = () => {
   return false;
 }
 
-
 function chooseOperator(button){
 
   if(!firstNum){
@@ -107,9 +106,6 @@ function operate (operator){
     case '−':
       firstNum = a - b;
       break;
-  }
-  if (firstNum === Infinity){
-    return;
   }
 
   firstNum = firstNum.toString();
