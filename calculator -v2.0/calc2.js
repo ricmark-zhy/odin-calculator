@@ -6,6 +6,11 @@ let firstNum = '', secondNum = '', input = '';
 let shiftToSecond = false;
 let currentOperator = '';
 
+let operators = '÷×+−';
+let isOperator = (operator) => {
+  return operators.includes(operator) ? true : false;
+}
+
 calculator.addEventListener('click', event => {
   if (event.target.closest('button')){
     let button = event.target.id;
@@ -28,10 +33,59 @@ calculator.addEventListener('click', event => {
   }
 });
 
+function convertOpkeys(key){
+  if (key === '-'){
+    return '−';
+  } else if (key === '/'){
+    return '÷';
+  } else if (key === '*'){
+    return '×';
+  } else if (key === '=' || key === 'Enter'){
+    return 'equals';
+  } else {
+    return '+';
+  }
+}
+
+let operatorKeys = '+-/*=';
+
+// document.body.addEventListener('keyup', (event) => {
+//   if (event.key === 'Enter')
+// })
+
+document.body.addEventListener('keydown', (event) => {
+  let key = event.key;
+
+  if (event.key === 'Enter'){
+    event.preventDefault();
+    key = 'Enter';
+  }
+
+  if(!isNaN(key) || key === '.'){
+    handleNumber(key);
+    updateDisplay();
+  } else if (event.altKey && key === '-'){
+    event.preventDefault();
+    changeSign();
+    updateDisplay();
+  } else if (operatorKeys.includes(key) || key === 'Enter'){
+    let operator = convertOpkeys(key);
+    chooseOperator(operator);
+    updateDisplay();
+  } else if (key === 'Delete'){
+    clear();
+    updateDisplay();
+  } else if (key === 'Backspace'){
+    del();
+    updateDisplay();
+  } 
+})
+
 function handleNumber(button){
+  let numString = button.toString();
   let current = shiftToSecond ? secondNum : firstNum;
-  if (button === '.' && current.includes('.')) return;
-  current += button;
+  if (numString === '.' && current.includes('.')) return;
+  current += numString;
   !shiftToSecond ? (firstNum = current) : (secondNum = current);
 }
 
@@ -141,12 +195,4 @@ function changeSign(){
 
   !shiftToSecond ? (firstNum = current) : (secondNum = current);
   
-}
-
-let operators = '÷×+−';
-let isOperator = (operator) => {
-  if (operators.includes(operator)){
-    return true;
-  }
-  return false;
 }
