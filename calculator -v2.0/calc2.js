@@ -47,12 +47,7 @@ function updateDisplay(){
 
 function handleEquals() {
   if (currentOperator && secondNum) {
-    let temp = firstNum;
     operate(currentOperator);
-    if (firstNum === Infinity) {
-      handleInfinity();
-      return;
-    }
     shiftToSecond = false;
     currentOperator = '';
     prev_operand.textContent = '';
@@ -60,7 +55,25 @@ function handleEquals() {
   }
 }
 
+let isZeroDivision = () => {
+  if((firstNum === '0' || secondNum === '0') && currentOperator === '÷'){
+    return true;
+  }
+  return false;
+}
+
+
 function chooseOperator(button){
+
+  if(!firstNum){
+    return;
+  }
+
+  if (isZeroDivision()){
+    alert('dividing to 0 is not allowed. delete or clear your input!');
+    return;
+  }
+
   if (button === 'equals'){
     handleEquals();
     return;
@@ -71,12 +84,7 @@ function chooseOperator(button){
   if (!secondNum){
     currentOperator = button;
   } else {
-    let temp = firstNum;
     operate(currentOperator);
-    if (firstNum === Infinity){
-      handleInfinity();
-      return;
-    }
     currentOperator = button;
     secondNum = '';
   }
@@ -105,14 +113,6 @@ function operate (operator){
   }
 
   firstNum = firstNum.toString();
-}
-
-function handleInfinity(){
-  
-  alert("you can't divide a thing by nothing you silly kid!");
-  shiftToSecond = false;
-  firstNum = '';
-  secondNum = '';
 }
 
 function del(){
