@@ -2,7 +2,8 @@ const calculator = document.querySelector('#calculator');
 const curr_operand = document.querySelector('#current_operand');
 const prev_operand = document.querySelector('#previous_operand');
 
-let firstNum = '', secondNum = '', input = '';
+
+let firstNumText = '', secondNumText = '';
 let shiftToSecond = false;
 let currentOperator = '';
 
@@ -83,34 +84,34 @@ document.body.addEventListener('keydown', (event) => {
 
 function handleNumber(button){
   let numString = button.toString();
-  let current = shiftToSecond ? secondNum : firstNum;
+  let current = shiftToSecond ? secondNumText : firstNumText;
   if (numString === '.' && current.includes('.')) return;
   current += numString;
-  !shiftToSecond ? (firstNum = current) : (secondNum = current);
+  !shiftToSecond ? (firstNumText = current) : (secondNumText = current);
 }
 
 function updateDisplay(){
   if (!shiftToSecond){
     prev_operand.textContent = '';
-    curr_operand.textContent = firstNum;
+    curr_operand.textContent = firstNumText;
   } else {
-    prev_operand.textContent = firstNum + "" + currentOperator;
-    curr_operand.textContent = secondNum;
+    prev_operand.textContent = firstNumText + "" + currentOperator;
+    curr_operand.textContent = secondNumText;
   }
 }
 
 function handleEquals() {
-  if (currentOperator && secondNum) {
+  if (currentOperator && secondNumText) {
     operate(currentOperator);
     shiftToSecond = false;
     currentOperator = '';
     prev_operand.textContent = '';
-    secondNum = '';
+    secondNumText = '';
   }
 }
 
 let isZeroDivision = () => {
-  if((firstNum === '0' || secondNum === '0') && currentOperator === '÷'){
+  if((firstNumText === '0' || secondNumText === '0') && currentOperator === '÷'){
     return true;
   }
   return false;
@@ -118,7 +119,7 @@ let isZeroDivision = () => {
 
 function chooseOperator(button){
 
-  if(!firstNum){
+  if(!firstNumText){
     return;
   }
 
@@ -134,45 +135,46 @@ function chooseOperator(button){
 
   shiftToSecond = true;
 
-  if (!secondNum){
+  if (!secondNumText){
     currentOperator = button;
   } else {
     operate(currentOperator);
     currentOperator = button;
-    secondNum = '';
+    secondNumText = '';
   }
 }
 
 function operate (operator){
-  let a = Number(firstNum);
-  let b = Number(secondNum);
+  let a = Number(firstNumText);
+  let b = Number(secondNumText);
+  let result = 0;
 
   switch (operator){
     case '+':
-      firstNum = a + b;
+      result = a + b;
       break;
     case '÷':
-      firstNum = a / b;
+      result = a / b;
       break;
     case '×':
-      firstNum = a * b;
+      result = a * b;
       break;
     case '−':
-      firstNum = a - b;
+      result = a - b;
       break;
   }
 
-  firstNum = firstNum.toString();
+  firstNumText = result.toString();
 }
 
 function del(){
-  if (!secondNum){
+  if (!secondNumText){
     currentOperator = '';
   }
   if (!shiftToSecond){
-    firstNum = firstNum.slice(0, -1);
+    firstNumText = firstNumText.slice(0, -1);
   } else {
-    secondNum = secondNum.slice(0, -1);
+    secondNumText = secondNumText.slice(0, -1);
   }
   if (!currentOperator){
     shiftToSecond = false;
@@ -181,19 +183,19 @@ function del(){
 
 function clear(){
   shiftToSecond = false;
-  firstNum = '';
-  secondNum = '';
+  firstNumText = '';
+  secondNumText = '';
   currentOperator = '';
   prev_operand.textContent = '';
   curr_operand.textContent = '';
 }
 
 function changeSign(){
-  let current = shiftToSecond ? secondNum : firstNum;
+  let current = shiftToSecond ? secondNumText : firstNumText;
 
   current.includes('-') ? current = current.slice(1) : current = '-' + current;
 
-  !shiftToSecond ? (firstNum = current) : (secondNum = current);
+  !shiftToSecond ? (firstNumText = current) : (secondNumText = current);
   
 }
 
