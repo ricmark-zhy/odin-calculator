@@ -196,3 +196,7 @@ function changeSign(){
   !shiftToSecond ? (firstNum = current) : (secondNum = current);
   
 }
+
+const currentYear = new Date().getFullYear();
+const author = document.querySelector('.author');
+author.textContent += currentYear;

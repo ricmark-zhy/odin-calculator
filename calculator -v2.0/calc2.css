@@ -7,6 +7,7 @@
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,10 +130,17 @@ h1{
   min-height: 48px;
 }
 
+hr{
+  margin-top: 2px;
+  border-radius: 2px;
+  border: none;
+  border-top: double 6px rgb(78, 75, 125);
+  overflow: visible;
+  text-align: center;
+  width: 100%;
+}
 
-
-/* form div{
-  display: flex;
-} */
-
+.author{
+  font-weight: 600;
+}
 
